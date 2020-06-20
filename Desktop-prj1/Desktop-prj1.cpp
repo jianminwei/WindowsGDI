@@ -15,9 +15,12 @@ VOID OnPaint(HDC hdc, Draw &draw)
     Graphics graphics(hdc);
     Pen      pen(Color(255, 0, 0, 255));
 
+    //You can also directly use GDI+ graphics functions to draw things. 
+    //But that's not the point. The point is to define your own DrawAPI 
+    //and use it for C++ programming practices.
     //graphics.DrawLine(&pen, 0, 0, 200, 100);
 
-    //Draw things defined in the draw object
+    //Draw things defined in the draw (DrawAPI)object
     draw.draw();
 }
 
@@ -88,7 +91,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message,
     {
     case WM_PAINT:
         hdc = BeginPaint(hWnd, &ps);
-        OnPaint(hdc, draw); //pass the draw object to the OnPaint() function
+        OnPaint(hdc, draw);  //pass the draw object to the OnPaint() function
         EndPaint(hWnd, &ps);
         return 0;
     case WM_DESTROY:

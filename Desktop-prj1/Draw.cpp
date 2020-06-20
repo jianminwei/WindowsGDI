@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Draw.h"
+#include "DrawAPI.h"
 
 Draw::Draw(HDC& hdc) : myHdc(hdc) { 
 	brush = CreateSolidBrush(RGB(0, 0, 0)); //create a default black brush
@@ -109,7 +110,6 @@ void Draw::line(int x1, int y1, int x2, int y2) {
 				for (int i = 0; i <= maxXorY; i++)
 					pixel(x1 + (int)(i * ((float)xAbsLength / maxXorY)), y1 - i);
 			}
-			
 		}
 	}
 	else {
@@ -150,16 +150,7 @@ void Draw::triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
 }
 
 void Draw::draw() {
-	setColor(Draw::color::GREEN);
-	setThickness(2);
+	DrawAPI drawAPI(*this);
 
-	line(20, 20, 400, 20);
-
-	setColor(Draw::color::CYAN);
-	setThickness(4);
-	rectangle(100, 100, 200, 500);
-
-	setColor(Draw::color::RED);
-	setThickness(1);
-	triangle(50, 50, 300, 300, 150, 400);
+	drawAPI.draw();  //draw everything defined in drawAPI
 }

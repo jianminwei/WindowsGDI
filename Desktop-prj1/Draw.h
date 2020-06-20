@@ -1,4 +1,10 @@
+#include "DrawAPI.h"
+
 #pragma once
+
+#ifndef DRAW_H_
+#define DRAW_H_
+
 class Draw
 {
 private:
@@ -19,4 +25,6 @@ public:
     void draw();
 
 };
+
+#endif 
 
