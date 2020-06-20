@@ -17,7 +17,8 @@ public:
                  SILVER,GRAY,MAROON,OLIVE,GREEN,PURPLE,TEAL,NAVY};
     Draw(HDC& hdc);
     void setColor(color theColor);
-    void setThickness(int);
+    void setThickness(int thinkness);
+    void setBrush(color theColor, int thinkness);
     void pixel(int x, int y);
     void line(int x1, int y1, int x2, int y2);
     void rectangle(int x1, int y1, int x2, int y2);

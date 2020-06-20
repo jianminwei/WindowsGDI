@@ -70,6 +70,11 @@ void Draw::setThickness(int thick) {
 	lineThick = thick;
 }
 
+void Draw::setBrush(color theColor, int thinkness) {
+	setColor(theColor);
+	lineThick = thinkness;
+}
+
 /******** Draw a pixel logic using the GDI RECT mimicing a pixel
 HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
 RECT rect = { 20, 20, 22, 22 };
