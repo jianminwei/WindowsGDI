@@ -4,7 +4,7 @@
 Draw::Draw(HDC& hdc) : myHdc(hdc) { 
 	brush = CreateSolidBrush(RGB(0, 0, 0)); //create a default black brush
 	lineThick = 1;                          //set the default lineThick = 1
-}
+} 
 
 void Draw::setColor(color theColor) {
 	//BLACK, WHITE, RED, LIME, BLUE, YELLOW, CYAN, MAGENTA,
