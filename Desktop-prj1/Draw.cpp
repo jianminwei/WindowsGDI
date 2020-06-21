@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Draw.h"
 #include "DrawAPI.h"
+#include <cmath>  //for std::sqrt() function
 
 Draw::Draw(HDC& hdc) : myHdc(hdc) { 
 	brush = CreateSolidBrush(RGB(0, 0, 0)); //create a default black brush
@@ -152,6 +153,50 @@ void Draw::triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
 	line(x1, y1, x2, y2);
 	line(x2, y2, x3, y3);
 	line(x3, y3, x1, y1);
+}
+
+void Draw::circle(int xCenter, int yCenter, int radius) {
+
+	// 1. Draw the circle from (0, 0). We can then move it to the center of (x,y) position.
+	// 2. In order to get the best accurate result, before 45 degree, use X for calculation
+	//    after 45 degree, use y for calculation. 
+    // 3. Math formula: cos(45 degree) = sin(45 degree) = 0.70710678118
+
+	int xDegree45 = (int) (radius * 0.70710678118);
+	int yDegree45 = (int) (radius * 0.70710678118);
+
+	// Formular: y = sqrt(radius^2 - x^2); x = sqrt(radius^2 - y^2)
+	for (int i = 0; i <= xDegree45; i++) {
+		int y = (int) std::sqrt(radius * radius - i * i);
+
+		//when draw the pixel, needs to adjust the (x,y) center.
+		pixel(xCenter - i, yCenter - y);
+
+		//draw above mirror image.
+		pixel(xCenter - i, yCenter + y);
+
+		//draw right mirror image.
+		pixel(xCenter + i, yCenter - y);
+
+		//draw right above mirror image.
+		pixel(xCenter + i, yCenter + y);
+	}
+
+	for (int i = 0; i <= yDegree45; i++) {
+		int x = (int)std::sqrt(radius * radius - i * i);
+
+		//when draw the pixel, needs to adjust the (x,y) center.
+		pixel(xCenter - x, yCenter - i);
+
+		//draw above mirror image.
+		pixel(xCenter - x, yCenter + i);
+
+		//draw right mirror image.
+		pixel(xCenter + x, yCenter - i);
+
+		//draw right above mirror image.
+		pixel(xCenter + x, yCenter + i);
+	}
 }
 
 void Draw::draw() {
