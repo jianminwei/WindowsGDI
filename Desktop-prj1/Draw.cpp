@@ -1,3 +1,17 @@
+/**************************************************************************\
+*
+* Jianmin Wei, June 2020, No Reservation - do whatever you want.
+*
+* Module Name:
+*
+*   Draw.cpp
+*
+* Abstract:
+*
+*   Draw class implementation.
+*
+\**************************************************************************/
+#pragma once
 #include "pch.h"
 #include "Draw.h"
 #include "DrawAPI.h"

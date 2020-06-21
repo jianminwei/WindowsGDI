@@ -1,6 +1,20 @@
-// Desktop-prj1.cpp : Defines the entry point for the application.
-//
-
+/**************************************************************************\
+*
+* Jianmin Wei, June 2020, No Reservation - do whatever you want.
+*
+* Module Name:
+*
+*   Desktop-prj1.cpp
+*
+* Abstract:
+*
+*   This is the standard windows starting file. I only instantiated
+*   the Draw object "draw" in the WndProc() function. And execute the 
+*   draw.draw() method in the OnPaint() functon.The key is to pass the
+*   hdc to the draw object.
+*
+\**************************************************************************/
+#pragma once
 #include "pch.h"
 #include "Desktop-prj1.h"
 #include <objidl.h>

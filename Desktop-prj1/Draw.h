@@ -1,7 +1,17 @@
+/**************************************************************************\
+*
+* Jianmin Wei, June 2020, No Reservation - do whatever you want.
+*
+* Module Name:
+*
+*   Draw.h
+*
+* Abstract:
+*
+*   Draw class header file
+*
+\**************************************************************************/
 #include "DrawAPI.h"
-
-#pragma once
-
 #ifndef DRAW_H_
 #define DRAW_H_
 
