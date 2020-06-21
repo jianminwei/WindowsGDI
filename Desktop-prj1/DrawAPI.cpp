@@ -19,7 +19,7 @@ void DrawAPI::draw()
 	draw.line(20, 20, 600, 20);
 
 	draw.setBrush(Draw::color::CYAN, 1);
-	draw.rectangle(100, 100, 200, 450);
+	draw.rectangle(80, 80, 600, 250, Draw::fill::FILL);
 
 	draw.setBrush(Draw::color::GREEN, 2);
 	draw.triangle(50, 50, 300, 300, 150, 400);

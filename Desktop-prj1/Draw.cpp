@@ -99,21 +99,23 @@ void Draw::line(int x1, int y1, int x2, int y2) {
 	if (x2 >= x1) {
 		if (y2 >= y1) {
 			if (xAbsLength >= yAbsLength) {
-				for (int i = 0; i <= maxXorY; i++)
+				//Note: Below adjust the lineThickness making the line more accurate.
+				//this adjustment applies to all below calculations.
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 + i, y1 + (int) (i * (float) yAbsLength / maxXorY));
 			}
 			else {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 + (int)(i * ((float)xAbsLength / maxXorY)), y1 + i);
 			}
 		}
 		else {
 			if (xAbsLength >= yAbsLength) {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 + i, y1 - (int)(i * (float)yAbsLength / maxXorY));
 			}
 			else {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 + (int)(i * ((float)xAbsLength / maxXorY)), y1 - i);
 			}
 		}
@@ -121,32 +123,57 @@ void Draw::line(int x1, int y1, int x2, int y2) {
 	else {
 		if (y2 >= y1) {
 			if (xAbsLength >= yAbsLength) {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 - i, y1 + (int)(i * (float)yAbsLength / maxXorY));
 			}
 			else {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 - (int)(i * ((float)xAbsLength / maxXorY)), y1 + i);
 			}
 		}
 		else {
 			if (xAbsLength >= yAbsLength) {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 - i, y1 - (int)(i * (float)yAbsLength / maxXorY));
 			}
 			else {
-				for (int i = 0; i <= maxXorY; i++)
+				for (int i = 0; i <= maxXorY - lineThick; i++)
 					pixel(x1 - (int)(i * ((float)xAbsLength / maxXorY)), y1 - i);
 			}
 		}
 	}
 }
 
-void Draw::rectangle(int x1, int y1, int x2, int y2) {
-	line(x1, y1, x2, y1);
-	line(x2, y1, x2, y2);
-	line(x2, y2, x1, y2);
-	line(x1, y2, x1, y1);
+void Draw::rectangle(int x1, int y1, int x2, int y2, fill toFill) {
+
+	if (toFill == FILL) {  //draw a filled rectangle
+		int tmpThickness = lineThick;
+
+		//This logic is to use shorter side of the rectangle as the brush thickness,
+		//and one line draw to complete the rectangle.
+		if (x2 - x1 > y2 - y1) {
+			setThickness(y2 - y1);
+			line(x1, y1, x2, y1);
+		}
+		else
+		{
+			setThickness(x2 - x1);
+			line(x1, y1, x1, y2);
+		}
+
+		setThickness(tmpThickness); //reset the thinkNess
+
+		//Below method is too slow. So changed to above approach.
+		//for (int i = 0; i <= y2 - y1; i++) {
+		//	line(x1, y1 + i, x2, y1 + i);
+		//}
+	}
+	else {
+		line(x1, y1, x2, y1);
+		line(x2, y1, x2, y2);
+		line(x2, y2, x1, y2);
+		line(x1, y2, x1, y1);
+	}
 }
 
 void Draw::triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
